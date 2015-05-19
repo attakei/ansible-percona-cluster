@@ -12,8 +12,5 @@ before_install:
 install:
   - pip install ansible
 
-  # Add ansible.cfg to pick up roles path.
-  - "printf '[defaults]\nroles_path = ../' > ansible.cfg"
-
 script:
-  - "ansible-playbook -i tests/inventory tests/single.yml --syntax-check"
+  - "cd ./tests && ansible-playbook -i inventory single.yml --syntax-check"
