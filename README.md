@@ -1,5 +1,5 @@
-Role Name
-=========
+percona-cluster
+===============
 
 A brief description of the role goes here.
 
@@ -23,14 +23,17 @@ Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
+    - hosts: cluster_bootstrap
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: percona-cluster, tags:['bootstrap'] }
+    - hosts: cluster
+      roles:
+         - { role: percona-cluster, tags:['node'] }
 
 License
 -------
 
-BSD
+MIT License.
 
 Author Information
 ------------------
