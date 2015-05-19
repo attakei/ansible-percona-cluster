@@ -13,4 +13,4 @@ install:
   - pip install ansible
 
 script:
-  - "cd ./tests && ansible-playbook -i inventory single.yml --syntax-check"
+  - "cd ./tests && ansible-playbook -c local -i inventory single.yml --syntax-check"
