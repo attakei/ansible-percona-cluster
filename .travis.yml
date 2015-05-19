@@ -1,0 +1,16 @@
+---
+language: python
+python: "2.7"
+
+env:
+  - SITE=test.yml
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y curl
+
+install:
+  - pip install ansible
+
+script:
+  - "cd ./tests && ansible-playbook -i inventory single.yml --syntax-check"

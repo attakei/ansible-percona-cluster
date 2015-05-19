@@ -1,2 +1,7 @@
 ---
 # tasks file for .
+- name: install pxc package
+  command: echo 'stub'
+  tags:
+  - bootstrap
+  - setup
