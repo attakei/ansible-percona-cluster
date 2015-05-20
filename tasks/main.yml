@@ -28,3 +28,4 @@
 - name: (redhat) install percona db
   yum: state=present name='Percona-XtraDB-Cluster-55'
   sudo: yes
+  when: ansible_os_family == "Redhat"
