@@ -19,8 +19,8 @@
   - 'nc'
   - 'http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm'
   sudo: yes
-  when: ansible_os_family == "Redhat"
+  when: ansible_os_family == "RedHat"
 - name: Install PXC repository (redhat)
   yum: state=present name='Percona-XtraDB-Cluster-55'
   sudo: yes
-  when: ansible_os_family == "Redhat"
+  when: ansible_os_family == "RedHat"
