@@ -1,10 +1,5 @@
 ---
 # tasks file for .
-- name: install pxc package
-  command: echo 'stub'
-  tags:
-  - bootstrap
-  - setup
 - name: Add apt-key (debian)
   apt_key: state=present keyserver=keys.gnupg.net id=1C4CBDCDCD2EFD2A
   sudo: yes
