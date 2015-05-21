@@ -1,0 +1,23 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+$INSTANCES_NUM = 1
+
+Vagrant.configure(2) do |config|
+
+  config.vm.box = "scalefactory/centos6"
+  config.vm.box_check_update = true
+
+  config.vm.define vm_name = "ansible-percona-cluster-test-centos6" do |config|
+    config.vm.hostname = vm_name
+
+    ip = "192.168.99.100"
+    config.vm.network :private_network, ip: ip
+  end
+
+  config.ssh.insert_key = false
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "./playbook.yml"
+  end
+end
