@@ -1,7 +1,8 @@
 ---
 # tasks file for .
 - name: Add apt-key (debian)
-  apt_key: state=present keyserver=keys.gnupg.net id=1C4CBDCDCD2EFD2A
+  # TODO: memo 
+  command: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C4CBDCDCD2EFD2A
   sudo: yes
   when: ansible_os_family == "Debian" or ansible_os_family == "Ubuntu"
 - name: Add PXC repository (debian)
