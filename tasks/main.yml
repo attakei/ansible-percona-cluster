@@ -10,11 +10,15 @@
   sudo: yes
   when: ansible_os_family == "Debian" or ansible_os_family == "Ubuntu"
 - name: Install PXC repository (debian)
-  apt: state=present name=percona-xtradb-cluster-full-55
+  apt: state=present update_cache=yes name={{ item }}
   sudo: yes
+  with_items:
+  - percona-xtradb-cluster-galera-2
+  - percona-xtradb-cluster-galera2-dbg
+  - percona-xtradb-cluster-full-55
   when: ansible_os_family == "Debian" or ansible_os_family == "Ubuntu"
 - name: Install dependencies of PXC (redhat)
-  yum: state=present name='{{ item }}'
+  yum: state=present name={{ item }}
   with_items:
   - 'epel-release'
   - 'nc'
