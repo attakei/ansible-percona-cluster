@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
     v.cpus = 1
   end
 
-  config.vm.define vm_name = "test-centos66" do |config|
+  config.vm.define vm_name = "test-centos6.6" do |config|
     config.vm.hostname = vm_name
 
     ip = "192.168.99.100"
@@ -20,7 +20,8 @@ Vagrant.configure(2) do |config|
 
   config.ssh.insert_key = false
 
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "./playbook.yml"
-  end
+  config.vm.synced_folder ".", "/vagrant", :mount_options => ['dmode=775', 'fmode=664']
+  config.vm.synced_folder "../..", "/ansible/percona-cluster", :mount_options => ['dmode=775', 'fmode=664']
+
+  config.vm.provision "shell", :path => "provision.sh"
 end
