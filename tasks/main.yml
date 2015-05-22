@@ -1,7 +1,31 @@
 ---
 # tasks file for .
-- name: install pxc package
-  command: echo 'stub'
-  tags:
-  - bootstrap
-  - setup
+- name: Add apt-key (debian)
+  # TODO: memo 
+  command: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1C4CBDCDCD2EFD2A
+  sudo: yes
+  when: ansible_os_family == "Debian" or ansible_os_family == "Ubuntu"
+- name: Add PXC repository (debian)
+  template: src=./percona.list dest=/etc/apt/sources.list.d/percona.list
+  sudo: yes
+  when: ansible_os_family == "Debian" or ansible_os_family == "Ubuntu"
+- name: Install PXC repository (debian)
+  apt: state=present update_cache=yes name={{ item }}
+  sudo: yes
+  with_items:
+  - percona-xtradb-cluster-galera-2
+  - percona-xtradb-cluster-galera2-dbg
+  - percona-xtradb-cluster-full-55
+  when: ansible_os_family == "Debian" or ansible_os_family == "Ubuntu"
+- name: Install dependencies of PXC (redhat)
+  yum: state=present name={{ item }}
+  with_items:
+  - 'epel-release'
+  - 'nc'
+  - 'http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm'
+  sudo: yes
+  when: ansible_os_family == "RedHat"
+- name: Install PXC repository (redhat)
+  yum: state=present name='Percona-XtraDB-Cluster-55'
+  sudo: yes
+  when: ansible_os_family == "RedHat"
