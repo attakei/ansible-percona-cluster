@@ -5,7 +5,7 @@
   sudo: yes
   when: ansible_os_family == "Debian" or ansible_os_family == "Ubuntu"
 - name: Add PXC repository (debian)
-  copy: src=./percona.list dest=/etc/apt/sources.list.d/percona.list
+  template: src=./percona.list dest=/etc/apt/sources.list.d/percona.list
   sudo: yes
   when: ansible_os_family == "Debian" or ansible_os_family == "Ubuntu"
 - name: Install PXC repository (debian)
